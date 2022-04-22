@@ -13,4 +13,21 @@ export default makeStyles(() => ({
   pointer: {
     cursor: 'pointer',
   },
+
+  buttonCallout: {
+	position: 'absolute',
+	bottom: '8px',
+	right: '66px',
+	
+    // flex: 1,
+    // flexDirection:'row',
+    // position:'fixed',
+    // // bottom:10,
+    // alignSelf: "center",
+    // justifyContent: "space-between",
+    // // backgroundColor: "transparent",
+    // borderWidth: 0.5,
+    // borderRadius: 20,
+	// minHeight: 50 
+  },
 }));
