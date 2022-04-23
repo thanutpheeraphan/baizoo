@@ -9,29 +9,44 @@ import Header from "../src/components/Header/Header";
 import List from "../src/components/List/List";
 import Map from "../src/components/Map/Map";
 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Switch,
+} from "react-router-dom";
+import Filter from "./components/Filter/Filter";
+import Main from "./components/Main/Main";
+import { Fragment } from "react";
+import FilterPage from "./components/FilterPage/FilterPage";
+
 function App() {
   const myLatLng = { lat: 13.756331, lng: 100.501762 };
   const ausLatLng = { lat: -25.9870530979263, lng: 133.95953531473327 };
   console.log("Ran!");
   return (
-    <>
-      <CssBaseline />
-      <Header />
-      <Grid container spacing={3} style={{ width: "100%" }}>
-        <Grid item xs={12} md={8}>
-  
-            <Map>
-              {/* <Marker text={"Test"} lat={myLatLng.lat} lng={myLatLng.lng}/> */}
-			
-            </Map>
-           
+    <Fragment>
+      <Router>
+        <div>
+          <CssBaseline />
+          <Header />
+        </div>
 
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <List />
-        </Grid>
-      </Grid>
-    </>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            // component={Main}
+            render={(props) => <Main {...props} />}
+          />
+          <Route
+            exact
+            path="/filter"
+			render={(props) => <FilterPage {...props} />}
+          />
+        </Switch>
+      </Router>
+    </Fragment>
   );
 }
 

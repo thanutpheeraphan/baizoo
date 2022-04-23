@@ -3,6 +3,7 @@ import { alpha, makeStyles } from '@material-ui/core/styles';
 export default makeStyles((theme) => ({
   title: {
     display: 'none',
+	marginLeft: 1.2+"rem",
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
