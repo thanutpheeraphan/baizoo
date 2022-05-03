@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import ReactDom from "react-dom";
-import Marker from "../Marker/Marker";
 import RoomIcon from "@mui/icons-material/Room";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
-
+import { Loader } from "@googlemaps/js-api-loader"
+import { Marker } from '@react-google-maps/api';
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import {
   Paper,
   Typography,
