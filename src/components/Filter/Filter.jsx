@@ -22,6 +22,7 @@ function Filter(props) {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+	props.getScrollBar(newValue);
   };
 
   return (

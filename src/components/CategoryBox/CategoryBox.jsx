@@ -2,20 +2,27 @@ import { useState } from "react";
 import Multiselect from "multiselect-react-dropdown";
 import { Typography } from "@material-ui/core";
 
-function CategoryBox() {
-  const [food, setFood] = useState([
-    "Food and Restaurants",
+function CategoryBox(props) {
+  const options = [
+    "Food",
+    "Relaxtion",
+    "Zoo",
     "Shopping",
-    "Spa and Relaxation",
-    "Bar and Clubs",
+    "Bar",
     "Cafe",
-    "Entertainment and Amusement Parks",
-    "Historical and Cultural",
-  ]);
+    "Historical",
+  ];
+
+  const [food, setFood] = useState([]);
+
+  const handleChange = (event) => {
+    // setValue(event);
+	props.getCategory(event);
+  };
 
   return (
-    <div style={{marginTop: 1.5 + 'em'}}>
-		<Typography variant="h5" component="div" gutterBottom >
+    <div style={{ marginTop: 1.5 + "em" }}>
+      <Typography variant="h5" component="div" gutterBottom>
         Category
       </Typography>
       <Multiselect
@@ -23,10 +30,12 @@ function CategoryBox() {
         // onRemove={(event) => {
         //   console.log(event);
         // }}
-        // onSelect={(event) => {
+        onSelect={(event) => {
         //   console.log(event);
-        // }}
-        options={food}
+		  setFood(event);
+		  handleChange(event);
+        }}
+        options={options}
         showCheckbox
       />
     </div>
