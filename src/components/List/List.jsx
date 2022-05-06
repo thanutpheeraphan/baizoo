@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {CircularProgress , Grid , Typography , InputLabel , MenuItem , FormControl , Select} from '@material-ui/core';  
 
 import useStyles from './styles';
@@ -6,23 +6,47 @@ import useStyles from './styles';
 import PlaceDetails from '../PlaceDetails/PlaceDetails'
 
 
-const List = () => {
+const List = (props) => {
 	const classes = useStyles();
 	const [type , setType] = useState('restaurants');
 	const [rating , setRating] = useState('');
+	const [mapData, setMapData] = useState([]);
+	const [updatedUri , setUpdatedUri] = useState("");
+
 
 	// const [elRefs, setElRefs] = useState([]);
 
-	const places = [
-		{name : 'Test Place 1'},
-		{name : 'Test Place 2'},
-		{name : 'Test Place 3'},
-		{name : 'Test Place 4'},
-		{name : 'Test Place 5'},
-		{name : 'Test Place 6'},
-		{name : 'Test Place 7'},
-	];
-  
+	async function fetchAPI() {
+		console.log("Props.URI: ",props.uri);
+		var fetchURL = props.uri;
+		try {
+		  const response = await fetch(fetchURL, {
+			method: "GET",
+		  });
+	
+		  let parseResponse = (await response.json());
+		  setMapData(parseResponse);
+	
+		
+		} catch (err) {
+		  console.error(err.message);
+		}
+	  }
+
+	useEffect(()=>{
+		fetchAPI();
+	},[props.uri])
+
+	// useEffect(()=>{
+	// 	fetchAPI();
+	// },[mapData])
+
+
+
+	useEffect(()=>{
+		setMapData(props.data);
+	},[props.data])
+	
 	// useEffect(() => {
 	//   setElRefs((refs) => Array(places.length).fill().map((_, i) => refs[i] || createRef()));
 	// }, [places]);
@@ -30,14 +54,15 @@ const List = () => {
 	return (
 	  <div className={classes.container}>
 		 <>
-			<FormControl className={classes.formControl}>
+		 <h1>List of places</h1>
+			{/* <FormControl className={classes.formControl}>
 			  <InputLabel id="type">Type</InputLabel>
 			  <Select id="type" value={type} onChange={(e) => setType(e.target.value)}>
 				<MenuItem value="restaurants">Restaurants</MenuItem>
 				<MenuItem value="hotels">Category</MenuItem>
 				<MenuItem value="attractions">Attractions</MenuItem>
 			  </Select>
-			</FormControl>
+			</FormControl> */}
 			{/* <FormControl className={classes.formControl}>
 			  <InputLabel id="rating">Rating</InputLabel>
 			  <Select id="rating" value={rating} onChange={(e) => setRating(e.target.value)}>
@@ -48,10 +73,10 @@ const List = () => {
 			  </Select>
 			</FormControl> */}
 			<Grid container spacing={3} className={classes.list}>
-			  {places?.map((place, i) => (
+			  {mapData?.map((mapDataItem, i) => (
 				<Grid key={i} item xs={12}>
 
-				  <PlaceDetails  place={place} />
+				  <PlaceDetails  place={mapDataItem.category} item={mapDataItem}/>
 				</Grid>
 			  ))}
 			</Grid>

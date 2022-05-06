@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
@@ -8,26 +8,22 @@ import Main from "./components/Main/Main";
 import Filter from "./components/Filter/Filter";
 import { CssBaseline } from "@mui/material";
 import Header from "./components/Header/Header";
-
-
-
+// import NewContext from "./mycontext";
 
 
 ReactDOM.render(
   // <React.StrictMode>
-//   <BrowserRouter>
-//     <Routes>
-//       <Route path="/" element={<Main/>}>
-//         {/* <Route path="main" element={<Main />}></Route> */}
-//         <Route path="filter" element={<Filter />}></Route>
-//       </Route>
-//     </Routes>
-//   </BrowserRouter>,
-  
+  //   <BrowserRouter>
+  //     <Routes>
+  //       <Route path="/" element={<Main/>}>
+  //         {/* <Route path="main" element={<Main />}></Route> */}
+  //         <Route path="filter" element={<Filter />}></Route>
+  //       </Route>
+  //     </Routes>
+  //   </BrowserRouter>,
 
-  
+    <App />,
 
-  <App />,
   //</React.StrictMode>,
   document.getElementById("root")
 );
