@@ -25,9 +25,11 @@ export default function FullScreenDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
   const [category, setCategory] = React.useState([]);
-  const url = new URL(
-	"https://titi-api.herokuapp.com/travel/spots"
-  );
+//   const url = new URL(
+// 	"https://baizoo-api-staging.herokuapp.com/travel/spots"
+//   );
+  const testprocess = String(process.env.REACT_APP_API_URL);
+  const url = new URL(testprocess);
 //   console.log("Origin: " + url.origin);
 //   console.log("Pathname: " + url.pathname);
 

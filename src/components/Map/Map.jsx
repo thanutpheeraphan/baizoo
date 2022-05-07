@@ -42,19 +42,18 @@ const Map = (props) => {
     // console.log(event.currentTarget);
   };
 
-  const gotoRestaurant = (lat,lng) => {
-
-	window.open(
-		`https://www.google.com/maps/place/${lat},${lng}`
-	  );
-
-  }
+  const gotoRestaurant = (lat, lng) => {
+    window.open(`https://www.google.com/maps/place/${lat},${lng}`);
+  };
 
   const newPin = () => {
     console.log(pinID);
-    window.open(
-      `https://www.google.com/maps/place/${pinID.latitude},${pinID.longtitude}`
-    );
+
+    if (pinID) {
+      window.open(
+        `https://www.google.com/maps/place/${pinID.latitude},${pinID.longtitude}`
+      );
+    }
   };
 
   const handleClose = () => {
@@ -87,10 +86,10 @@ const Map = (props) => {
     }
   }
 
-  useEffect(() => {
-    newPin();
-    // handleClick(e, pinID)
-  }, [pinID]);
+    useEffect(() => {
+      newPin();
+      // handleClick(e, pinID)
+    }, [pinID]);
 
   useEffect(() => {
     setParseResponse(props.data);
@@ -99,7 +98,12 @@ const Map = (props) => {
     if (props.uri == "") {
       setLoading(true);
       console.log("If");
-      const url = new URL("https://titi-api.herokuapp.com/travel/spots");
+    //   const url = new URL(
+    //     "https://baizoo-api-staging.herokuapp.com/travel/spots"
+    //   );
+      const testprocess = String(process.env.REACT_APP_API_URL);
+      const url = new URL(testprocess);
+
       const newLatLngURL = new URLSearchParams(
         `lat=${props.userLat}&long=${props.userLong}`
       );
@@ -135,7 +139,9 @@ const Map = (props) => {
   // 		  <Modal/>
   // 	  );
   //     }
-  const imageArray = itemData.image || ["https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"];
+  const imageArray = itemData.image || [
+    "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg",
+  ];
   return (
     <div className={classes.mapContainer}>
       {loading ? (
@@ -184,7 +190,13 @@ const Map = (props) => {
 
               <img src={imageArray[0]} width="150px"></img>
               {itemData.latitude && (
-                <Button variant="outlined"   style={{ marginTop: 10 + "px" }} onClick={() => gotoRestaurant(itemData.latitude,itemData.longtitude)}>
+                <Button
+                  variant="outlined"
+                  style={{ marginTop: 10 + "px" }}
+                  onClick={() =>
+                    gotoRestaurant(itemData.latitude, itemData.longtitude)
+                  }
+                >
                   <LocationOnIcon /> Travel to place
                 </Button>
               )}

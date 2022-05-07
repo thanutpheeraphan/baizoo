@@ -49,7 +49,10 @@ function Main(props) {
     console.log("this is lat", lat);
     console.log("this is long", lng);
 
-    const url = new URL("https://titi-api.herokuapp.com/travel/spots");
+    // const url = new URL("https://baizoo-api-staging.herokuapp.com/travel/spots");
+	// const url = new URL(process.env.REACT_APP_API_URL);
+	const testprocess = String(process.env.REACT_APP_API_URL);
+	const url = new URL(testprocess);
     const newLatLngURL = new URLSearchParams(`lat=${lat}&long=${lng}`);
     const new_url = new URL(`${url.origin}${url.pathname}?${newLatLngURL}`);
     console.log(new_url.href);
